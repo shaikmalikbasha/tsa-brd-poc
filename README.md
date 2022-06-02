@@ -1,1 +1,1 @@
-# tsa-brd-poc
+# Terraform scripts for the project TSA-BRD
