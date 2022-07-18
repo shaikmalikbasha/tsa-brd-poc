@@ -15,6 +15,13 @@ resource "azurerm_storage_account" "appStorageAccount" {
   account_kind             = "Storage"
 }
 
+resource "azurerm_storage_container" "blobContainer" {
+  name                  = each.value
+  storage_account_name  = azurerm_storage_account.appStorageAccount.name
+  container_access_type = "private"
+  for_each              = toset(var.containers)
+}
+
 resource "azurerm_application_insights" "applicationInsights" {
   name                = "appi-${var.name}-${var.environment}"
   location            = azurerm_resource_group.rg.location

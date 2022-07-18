@@ -13,3 +13,7 @@ variable "resource_group" {
 variable "location" {
   type = string
 }
+
+variable "containers" {
+  type = list(string)
+}
