@@ -38,8 +38,16 @@ resource "azurerm_linux_function_app" "functionApp" {
   storage_account_name = azurerm_storage_account.appStorageAccount.name
   service_plan_id      = azurerm_service_plan.servicePlan.id
 
+  app_settings = {
+    WEBSITE_RUN_FROM_PACKAGE = "1",
+    FUNCTIONS_WORKER_RUNTIME = "python"
+  }
   site_config {
     application_insights_key               = azurerm_application_insights.applicationInsights.instrumentation_key
     application_insights_connection_string = azurerm_application_insights.applicationInsights.connection_string
+    application_stack {
+      python_version = 3.8
+    }
   }
+
 }
